@@ -1,3 +1,8 @@
 export default function App() {
-  return <h1>Hotel App setup</h1>
+  return(
+    <div>
+      <h1>Hotel app setup works </h1>
+      <p> Mock mode: {import.meta.env.VITE_USE_MOCK_API}</p>
+    </div>
+  );
 }
