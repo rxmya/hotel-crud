@@ -1,38 +1,42 @@
-import { useDispatch } from "react-redux";
-import HotelForm from "./components/HotelForm";
-import { createHotel } from "./store/hotelSlice";
-
-const sampleHotel = {
-  id: 1,
-  title: "Lakeview Residency",
-  description: "A calm business hotel close to the city centre.",
-  latitude: 11.0168,
-  longitude: 76.9558,
-  price: 3200,
-  imageUrl: "/images/seed/hotel-1.svg",
-};
+import { Link, Route, Routes } from "react-router-dom";
+import HotelListPage from "./pages/HotelListPage";
+import HotelDetailPage from "./pages/HotelDetailPage";
+import HotelFormPage from "./pages/HotelFormPage";
 
 export default function App() {
-  const dispatch = useDispatch();
-
-  const handleCreate = async (values) => {
-    const hotel = await dispatch(createHotel(values)).unwrap();
-    alert(`Created hotel #${hotel.id}: ${hotel.title}`);
-  };
-
   return (
-    <div style={{ padding: 20, fontFamily: "sans-serif", maxWidth: 500 }}>
-      <h2>Add mode</h2>
-      <HotelForm onSubmit={handleCreate} submitLabel="Add hotel" />
+    <>
+      <header className="header">
+        <div className="container header-inner">
+          <Link to="/" className="logo">
+            StayFinder
+          </Link>
+          <Link to="/hotels/new" className="btn btn-primary">
+            + Add Hotel
+          </Link>
+        </div>
+      </header>
 
-      <hr />
+      <main className="container main">
+        <Routes>
+          <Route path="/" element={<HotelListPage />} />
+          <Route path="/hotels/new" element={<HotelFormPage />} />
+          <Route path="/hotels/:id" element={<HotelDetailPage />} />
+          <Route path="/hotels/:id/edit" element={<HotelFormPage />} />
+          <Route
+            path="*"
+            element={
+              <p>
+                Page not found. <Link to="/">Go home</Link>
+              </p>
+            }
+          />
+        </Routes>
+      </main>
 
-      <h2>Edit mode</h2>
-      <HotelForm
-        initialValues={sampleHotel}
-        onSubmit={(v) => console.log("Edit values:", v)}
-        submitLabel="Save changes"
-      />
-    </div>
+      <footer className="footer">
+        <div className="container">StayFinder · Hotel CRUD assessment</div>
+      </footer>
+    </>
   );
 }
