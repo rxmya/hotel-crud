@@ -9,7 +9,7 @@ function buildSeed() {
     id: index + 1,
     title: hotel.title,
     description: hotel.description,
-    laitude: hotel.latitude,
+    latitude: hotel.latitude,
     longitude: hotel.longitude,
     price: hotel.price,
     imageUrl: `/images/seed/hotel-${index + 1}.svg`,
@@ -44,11 +44,11 @@ function fileToCompressedDataUrl(file, maxWidth = 900, quality = 0.8) {
       const canvas = document.createElement("canvas");
       canvas.width = Math.round(img.width * scale);
       canvas.height = Math.round(img.height * scale);
-      canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.hight);
+      canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
       URL.revokeObjectURL(objectUrl);
       resolve(canvas.toDataURL("image/jpeg", quality));
     };
-    img.ONERROR = () => {
+    img.onerror = () => {
       URL.revokeObjectURL(objectUrl);
       reject(new Error("Failed to load image."));
     };
@@ -56,7 +56,7 @@ function fileToCompressedDataUrl(file, maxWidth = 900, quality = 0.8) {
   });
 }
 function notFound(id) {
-  const error = new error(`Hotel with id ${id} not found.`);
+  const error = new Error(`Hotel with id ${id} not found.`);
   error.status = 404;
   throw error;
 }
@@ -121,7 +121,8 @@ export async function updateHotel(id, values) {
     latitude: Number(values.latitude),
     longitude: Number(values.longitude),
     price: Number(values.price),
-    imageUrl: values.imageFile ? await fileToCompressedDataUrl(values.imageFile)
+    imageUrl: values.imageFile
+      ? await fileToCompressedDataUrl(values.imageFile)
       : hotels[index].imageUrl,
     updatedAt: new Date().toISOString(),
   };

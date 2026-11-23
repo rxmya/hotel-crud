@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9a8d4"/><stop offset="1" stop-color="#fdf2f8"/></linearGradient></defs>
+<rect width="800" height="500" fill="url(#g)"/><path d="M0 360 Q200 250 400 340 T800 320 V430 H0Z" fill="#831843" opacity="0.18"/>
+<rect x="230" y="190" width="340" height="240" rx="10" fill="#831843"/>
+<rect x="216" y="172" width="368" height="22" rx="6" fill="#831843" opacity="0.85"/>
+<rect x="260" y="240" width="36" height="34" rx="4" fill="#fde68a" opacity="0.95"/><rect x="320" y="240" width="36" height="34" rx="4" fill="#fde68a" opacity="0.95"/><rect x="380" y="240" width="36" height="34" rx="4" fill="#fde68a" opacity="0.95"/><rect x="440" y="240" width="36" height="34" rx="4" fill="#fde68a" opacity="0.95"/><rect x="500" y="240" width="36" height="34" rx="4" fill="#fde68a" opacity="0.95"/><rect x="260" y="300" width="36" height="34" rx="4" fill="#fde68a" opacity="0.95"/><rect x="320" y="300" width="36" height="34" rx="4" fill="#fde68a" opacity="0.95"/><rect x="380" y="300" width="36" height="34" rx="4" fill="#fde68a" opacity="0.95"/><rect x="440" y="300" width="36" height="34" rx="4" fill="#fde68a" opacity="0.95"/><rect x="500" y="300" width="36" height="34" rx="4" fill="#fde68a" opacity="0.95"/><rect x="260" y="360" width="36" height="34" rx="4" fill="#fdf2f8" opacity="0.95"/><rect x="320" y="360" width="36" height="34" rx="4" fill="#fdf2f8" opacity="0.95"/><rect x="380" y="360" width="36" height="34" rx="4" fill="#fdf2f8" opacity="0.95"/><rect x="440" y="360" width="36" height="34" rx="4" fill="#fdf2f8" opacity="0.95"/><rect x="500" y="360" width="36" height="34" rx="4" fill="#fdf2f8" opacity="0.95"/>
+<rect x="368" y="366" width="64" height="64" rx="6" fill="#fde68a"/>
+<rect x="330" y="204" width="140" height="24" rx="5" fill="#fdf2f8"/>
+<text x="400" y="221" font-family="Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#831843">HOTEL</text>
+<rect y="430" width="800" height="70" fill="#4b5563"/><rect y="460" width="800" height="6" fill="#e5e7eb" opacity="0.6"/>
+</svg>

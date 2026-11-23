@@ -9,7 +9,7 @@ export default function Pagination({page, totalPages, onPageChange}){
                 <button key = {p} className = {p === page ? 'active' : '' } onClick = {() => onPageChange(p)}>
                 {p}
                 </button>
-            ))};
+            ))}
             <button disabled = {page === totalPages} onClick = {() => onPageChange(page + 1)}>
                 Next
             </button>
