@@ -1,39 +1,38 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchHotels, setPage, PAGE_SIZE } from "./store/hotelSlice";
-import Seo from "./components/Seo";
-import Popup from "./components/Popup";
-import HotelCard from "./components/HotelCard";
-import Pagination from "./components/Pagination";
+import { useDispatch } from "react-redux";
+import HotelForm from "./components/HotelForm";
+import { createHotel } from "./store/hotelSlice";
+
+const sampleHotel = {
+  id: 1,
+  title: "Lakeview Residency",
+  description: "A calm business hotel close to the city centre.",
+  latitude: 11.0168,
+  longitude: 76.9558,
+  price: 3200,
+  imageUrl: "/images/seed/hotel-1.svg",
+};
 
 export default function App() {
   const dispatch = useDispatch();
-  const { items, total, page } = useSelector((state) => state.hotels);
-  const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    dispatch(fetchHotels());
-  }, [dispatch, page]);
+  const handleCreate = async (values) => {
+    const hotel = await dispatch(createHotel(values)).unwrap();
+    alert(`Created hotel #${hotel.id}: ${hotel.title}`);
+  };
 
   return (
-    <div style={{ padding: 20, fontFamily: "sans-serif" }}>
-      <Seo title="Component test" description="Testing components" />
+    <div style={{ padding: 20, fontFamily: "sans-serif", maxWidth: 500 }}>
+      <h2>Add mode</h2>
+      <HotelForm onSubmit={handleCreate} submitLabel="Add hotel" />
 
-      {items.map((hotel) => (
-        <HotelCard
-          key={hotel.id}
-          hotel={hotel}
-          onDelete={(h) => setMessage(`Delete clicked: ${h.title}`)}
-        />
-      ))}
+      <hr />
 
-      <Pagination
-        page={page}
-        totalPages={Math.ceil(total / PAGE_SIZE)}
-        onPageChange={(p) => dispatch(setPage(p))}
+      <h2>Edit mode</h2>
+      <HotelForm
+        initialValues={sampleHotel}
+        onSubmit={(v) => console.log("Edit values:", v)}
+        submitLabel="Save changes"
       />
-
-      <Popup message={message} onClose={() => setMessage("")} />
     </div>
   );
 }
