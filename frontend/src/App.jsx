@@ -1,47 +1,39 @@
 import { useEffect, useState } from "react";
-import hotelApi, { USE_MOCK_API } from "./api/hotelApi";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchHotels, setPage, PAGE_SIZE } from "./store/hotelSlice";
+import Seo from "./components/Seo";
+import Popup from "./components/Popup";
+import HotelCard from "./components/HotelCard";
+import Pagination from "./components/Pagination";
 
 export default function App() {
-  const [result, setResult] = useState(null);
-  const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
+  const { items, total, page } = useSelector((state) => state.hotels);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    hotelApi.getHotels({ search, offset: 0, limit: 5 }).then(setResult);
-  }, [search]);
+    dispatch(fetchHotels());
+  }, [dispatch, page]);
 
   return (
     <div style={{ padding: 20, fontFamily: "sans-serif" }}>
-      <p>Mock mode: {String(USE_MOCK_API)}</p>
-      <input
-        placeholder="Search…"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+      <Seo title="Component test" description="Testing components" />
+
+      {items.map((hotel) => (
+        <HotelCard
+          key={hotel.id}
+          hotel={hotel}
+          onDelete={(h) => setMessage(`Delete clicked: ${h.title}`)}
+        />
+      ))}
+
+      <Pagination
+        page={page}
+        totalPages={Math.ceil(total / PAGE_SIZE)}
+        onPageChange={(p) => dispatch(setPage(p))}
       />
-      {!result ? (
-        <p>Loading…</p>
-      ) : (
-        <>
-          <p>
-            Total matches: {result.total} (showing {result.data.length})
-          </p>
-          {result.data.map((h) => (
-            <div
-              key={h.id}
-              style={{
-                display: "flex",
-                gap: 12,
-                alignItems: "center",
-                marginBottom: 8,
-              }}
-            >
-              <img src={h.imageUrl} alt="" width="80" />
-              <span>
-                #{h.id} {h.title}: ₹{h.price}
-              </span>
-            </div>
-          ))}
-        </>
-      )}
+
+      <Popup message={message} onClose={() => setMessage("")} />
     </div>
   );
 }
