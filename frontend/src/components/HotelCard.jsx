@@ -17,7 +17,7 @@ export default function HotelCard({ hotel, onDelete}) {
                     {formatPrice(hotel.price)} <span>/ night</span>
                 </p>
                 <div className = "card-actions" onClick = {(e) => e.stopPropagation()}>
-                    <Link to = {`/hotel/${hotel.id}/edit`} className= "btn btn-primary"> Edit
+                    <Link to = {`/hotels/${hotel.id}/edit`} className= "btn btn-primary"> Edit
                     </Link>
                     <button className = "btn btn-danger" onClick ={() => onDelete(hotel)}> Delete
                     </button>
