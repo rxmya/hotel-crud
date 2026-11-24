@@ -3,7 +3,7 @@ function isNumberBetween(value, min, max){
     const number = Number(value);
     return !Number.isNaN(number) && number >= min && number <= max;
 }
-export function validateHotel(bosy, { file, requireImage }){
+export function validateHotel(body, { file, requireImage }){
     const errors = {};
     const title = (body.title || '').trim();
     if (title.length < 3 || title.length > 100){
